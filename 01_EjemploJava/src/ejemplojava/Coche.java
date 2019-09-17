@@ -2,20 +2,23 @@ package ejemplojava;
 
 public class Coche { // hereda de Object
     
+    public static final int CAPACIDAD_DEPOSITO = 60;
+    
     private final byte numRuedas;   // Valor constante por el final
     private String marca;
-    int capacidadDeposito;
-    boolean esGasolina;
-    private double nivelDeposito;
-    boolean arrancado;
+    private boolean esGasolina;
+    private double nivDeposito;
+    private boolean arrancado;
     
-    public Coche(String marca) {
+    public Coche(String marca, boolean esGasolina) {
         this.numRuedas = 4;
         this.marca = marca;
+        this.esGasolina = esGasolina;
+        
     }
     
     public double getNivelDep() {
-        return nivelDeposito;
+        return nivDeposito;
     }
 
     public byte getNumRuedas() {
@@ -25,24 +28,24 @@ public class Coche { // hereda de Object
     
     public void echarCarburante(double cantidad) {
         if (cantidad > 0)
-            this.nivelDeposito += cantidad;
+            this.nivDeposito += cantidad;
         
-        if (nivelDeposito > capacidadDeposito)
-            nivelDeposito = capacidadDeposito;
+        if (nivDeposito > CAPACIDAD_DEPOSITO)
+            nivDeposito = CAPACIDAD_DEPOSITO;
     }
     
     public void acelerar() {
-        if (arrancado)  nivelDeposito -= 0.1;
+        if (arrancado)  nivDeposito -= 0.1;
     }
     
     public void vaciarDeposito() {
         // float nivelDeposito = 2;
-        this.nivelDeposito = 3;
+        this.nivDeposito = 3;
         System.out.println("Deposito vaciado de " + this.toString()
                 /*+ "\n   Nivel: " + nivelDeposito*/ );  
     }
     public String toString() {
-        return "Coche " + marca + " nivel " + nivelDeposito;
+        return "Coche " + marca + " nivel " + nivDeposito;
     }
     public void mostrar() {
         System.out.println(this.toString()); 
@@ -51,4 +54,21 @@ public class Coche { // hereda de Object
     public String getMarca() {
         return marca;
     }
+
+    public boolean isEsGasolina() {
+        return esGasolina;
+    }
+
+    public boolean isArrancado() {
+        return arrancado;
+    }
+
+    public double getNivDeposito() {
+        return nivDeposito;
+    }
+
+    public void setArrancado(boolean arrancado) {
+        this.arrancado = arrancado;
+    }
+    
 }

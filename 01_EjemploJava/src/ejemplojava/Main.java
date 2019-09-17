@@ -19,13 +19,15 @@ public class Main {
         System.out.println("Empezando POO");
         Coche miCoche;
         
-        miCoche = new Coche("Kia"); // La instanciacion se hace con new
-        miCoche.capacidadDeposito = 60;
-        miCoche.esGasolina = true;
+        miCoche = new Coche("Kia", true); // La instanciacion se hace con new
+        
+        
         miCoche.echarCarburante(30); // Empezamos con medio deposito
         
+        System.out.println("Todos los coches tienen: " + Coche.CAPACIDAD_DEPOSITO);
         System.out.println("Coche creado: " + miCoche.getMarca());
         System.out.println("Nivel deposito: " + miCoche.getNivelDep() + " litros");
+        
         
         Coche otroCoche = miCoche; // new Coche();
         // otroCoche.marca = "Seat"; YA NO SE PUEDE
@@ -34,7 +36,7 @@ public class Main {
         miCoche.vaciarDeposito();
         System.out.println("Nivel deposito: " + otroCoche.getNivelDep() + " litros");
         
-        miCoche.arrancado = true;
+        miCoche.setArrancado(true);
         miCoche.echarCarburante(-2);
         for (int i = 0; i < 3; i++) 
             miCoche.acelerar();
