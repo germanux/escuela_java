@@ -15,7 +15,30 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
-    }
-    
+        
+        System.out.println("Empezando POO");
+        Coche miCoche;
+        
+        miCoche = new Coche("Kia"); // La instanciacion se hace con new
+        miCoche.capacidadDeposito = 60;
+        miCoche.esGasolina = true;
+        miCoche.echarCarburante(30); // Empezamos con medio deposito
+        
+        System.out.println("Coche creado: " + miCoche.getMarca());
+        System.out.println("Nivel deposito: " + miCoche.getNivelDep() + " litros");
+        
+        Coche otroCoche = miCoche; // new Coche();
+        // otroCoche.marca = "Seat"; YA NO SE PUEDE
+        System.out.println("Coche creado: " + otroCoche.getMarca());
+        // vaciarDeposito(miCoche);
+        miCoche.vaciarDeposito();
+        System.out.println("Nivel deposito: " + otroCoche.getNivelDep() + " litros");
+        
+        miCoche.arrancado = true;
+        miCoche.echarCarburante(-2);
+        for (int i = 0; i < 3; i++) 
+            miCoche.acelerar();
+        
+        miCoche.mostrar();
+    }    
 }
