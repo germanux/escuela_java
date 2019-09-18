@@ -5,6 +5,7 @@
  */
 package ejemplojava;
 
+import clasesjava.ProbandoString;
 import ejemplojava.Coche;
 import ejemplojava.CocheRally;
 import ejemplojava.NewClass;
@@ -16,10 +17,13 @@ import ejemplojava.TipoCarcubrante;
  */
 public class Main {
 
+    public static void main(String[] args) {
+        ProbandoString.tratarCadenas();
+    }
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void mainCoches(String[] args) {
         
         NewClass nc = new NewClass();
            

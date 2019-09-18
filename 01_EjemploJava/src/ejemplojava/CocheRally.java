@@ -31,10 +31,12 @@ public class CocheRally extends Coche {
         super.explosionCilindro();
     }
     // SOBRE ESCRITURA DE MÉTODOS
+    @Override
     public void acelerar() {
         System.out.println("Acelerando a lo rally ");
         if (this.isArrancado())  {
-            setNivDeposito(getNivDeposito() - .5);
+            super.acelerar();
+            setNivDeposito(getNivDeposito() - .4);
             // nivDeposito -= 0.1;
             explosionCilindro();
         }
