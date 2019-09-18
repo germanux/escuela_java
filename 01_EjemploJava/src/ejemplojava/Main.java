@@ -19,8 +19,8 @@ public class Main {
         System.out.println("Empezando POO");
         Coche miCoche;
         
-        miCoche = new Coche("Kia", true); // La instanciacion se hace con new
-        
+       // miCoche = new Coche("Kia", TipoCarcubrante.GASOLINA, TipoColor.BLANCO); // La instanciacion se hace con new
+        miCoche = new Coche("Kia", TipoCarcubrante.GASOLINA, "BlANCO"); // La instanciacion se hace con new
         
         miCoche.echarCarburante(30); // Empezamos con medio deposito
         
