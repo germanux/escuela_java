@@ -5,6 +5,11 @@
  */
 package ejemplojava;
 
+import ejemplojava.Coche;
+import ejemplojava.CocheRally;
+import ejemplojava.NewClass;
+import ejemplojava.TipoCarcubrante;
+
 /**
  *
  * @author Admin
@@ -15,6 +20,9 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        
+        NewClass nc = new NewClass();
+           
         
         System.out.println("Empezando POO");
         Coche miCoche;
@@ -42,5 +50,27 @@ public class Main {
             miCoche.acelerar();
         
         miCoche.mostrar();
+        
+        CocheRally miSupra = new CocheRally("TOYOTA", TipoCarcubrante.GASOLINA, "NEGRO", 2.1f);
+        miSupra.echarCarburante(40);
+        miSupra.setArrancado(true);
+        miSupra.acelerar();
+        miSupra.acelerar();
+        miSupra.derrapar();
+        //miSupra.setNivDeposito(4); Solo dentro del paquete
+        //miSupra.explosionCilindro();
+        miSupra.mostrar();
+        
+        Coche supraNormal = miSupra;    // Conversión implícita
+        supraNormal.explosionCilindro();
+        // supraNormal.derrapar();
+        supraNormal.acelerar();
+        supraNormal.mostrar();
+        
+        CocheRally cr = (CocheRally) supraNormal;   // Conversión explícita ó casting
+        System.out.println("Y el rozamiento?? " + cr.getRozamiento());
+        
+        cr = (CocheRally) miCoche;
+        System.out.println("Y el rozamiento?? " + cr.getRozamiento());
     }    
 }

@@ -11,6 +11,7 @@ public class Coche { // hereda de Object
     private boolean arrancado;
     private TipoColor color = TipoColor.ROJO;
     private final TipoCarcubrante carburante;
+
     
     public Coche(String marca, TipoCarcubrante carburante, TipoColor color) {
         this.numRuedas = 4;
@@ -45,7 +46,10 @@ public class Coche { // hereda de Object
     }
     
     public void acelerar() {
-        if (arrancado)  nivDeposito -= 0.1;
+        if (arrancado)  {
+            nivDeposito -= 0.1;
+            explosionCilindro();
+        }
     }
     
     public void vaciarDeposito() {
@@ -89,4 +93,10 @@ public class Coche { // hereda de Object
         this.color = color;
     }
     
+    protected void explosionCilindro() {
+        System.out.println("Motor funcionando");
+    }
+    protected void setNivDeposito(double nuevoNiv) {
+        this.nivDeposito = nuevoNiv;
+    }
 }
