@@ -1,6 +1,5 @@
 package ejemplojava;
 
-
 public class Coche { // hereda de Object
     
     public static final int CAPACIDAD_DEPOSITO = 60;
@@ -10,16 +9,22 @@ public class Coche { // hereda de Object
     private double nivDeposito;
     private boolean arrancado;
     private TipoColor color = TipoColor.ROJO;
-    private final TipoCarcubrante carburante;
+    private final TipoCarburante carburante;
 
     
-    public Coche(String marca, TipoCarcubrante carburante, TipoColor color) {
+    public Coche(String marca) {
+        this.numRuedas = 4;
+        this.marca = marca; 
+        this.color = TipoColor.BLANCO;
+        this.carburante = TipoCarburante.ELECTRICO;
+    }
+    public Coche(String marca, TipoCarburante carburante, TipoColor color) {
         this.numRuedas = 4;
         this.marca = marca; 
         this.color = color;
         this.carburante = carburante;
     }
-    public Coche(String marca, TipoCarcubrante carburante, String color) {
+    public Coche(String marca, TipoCarburante carburante, String color) {
         this.numRuedas = 4;
         this.marca = marca; 
         
@@ -73,7 +78,7 @@ public class Coche { // hereda de Object
         return color;
     }
 
-    public TipoCarcubrante getCarburante() {
+    public TipoCarburante getCarburante() {
         return carburante;
     }
 

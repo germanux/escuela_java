@@ -12,12 +12,12 @@ package ejemplojava;
 public class CocheRally extends Coche {
     private float rozamiento;
             
-    public CocheRally(String marca, TipoCarcubrante carburante, TipoColor color, float roz) {
+    public CocheRally(String marca, TipoCarburante carburante, TipoColor color, float roz) {
         super(marca, carburante, color);
         this.rozamiento = roz;
     }     
     // Sobre carga de constructor
-    public CocheRally(String marca, TipoCarcubrante carburante, String color, float roz) {
+    public CocheRally(String marca, TipoCarburante carburante, String color, float roz) {
         super(marca, carburante, color);
         this.rozamiento = roz;
     }

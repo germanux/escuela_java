@@ -9,7 +9,7 @@ import clasesjava.ProbandoString;
 import ejemplojava.Coche;
 import ejemplojava.CocheRally;
 import ejemplojava.NewClass;
-import ejemplojava.TipoCarcubrante;
+import ejemplojava.TipoCarburante;
 
 /**
  *
@@ -32,7 +32,7 @@ public class Main {
         Coche miCoche;
         
        // miCoche = new Coche("Kia", TipoCarcubrante.GASOLINA, TipoColor.BLANCO); // La instanciacion se hace con new
-        miCoche = new Coche("Kia", TipoCarcubrante.GASOLINA, "BlANCO"); // La instanciacion se hace con new
+        miCoche = new Coche("Kia", TipoCarburante.GASOLINA, "BlANCO"); // La instanciacion se hace con new
         
         miCoche.echarCarburante(30); // Empezamos con medio deposito
         
@@ -55,7 +55,7 @@ public class Main {
         
         miCoche.mostrar();
         
-        CocheRally miSupra = new CocheRally("TOYOTA", TipoCarcubrante.GASOLINA, "NEGRO", 2.1f);
+        CocheRally miSupra = new CocheRally("TOYOTA", TipoCarburante.GASOLINA, "NEGRO", 2.1f);
         miSupra.echarCarburante(40);
         miSupra.setArrancado(true);
         miSupra.acelerar();
