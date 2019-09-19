@@ -1,6 +1,6 @@
 package poo;
 
-public class Coche extends Vehiculo{ // hereda de Object
+public  class Coche extends Vehiculo implements Rodable { // hereda de Object
     
     public static final int CAPACIDAD_DEPOSITO = 60;
     
@@ -99,5 +99,10 @@ public class Coche extends Vehiculo{ // hereda de Object
             System.out.println("Abriendo puerta, cuidado coche encendido");
         else
             System.out.println("Abriendo puerta, cuidado coche encendido");
+    }
+
+    @Override
+    public void moverse() {        
+           System.out.println("AVANTI TUTO! "  + toString());
     }
 }

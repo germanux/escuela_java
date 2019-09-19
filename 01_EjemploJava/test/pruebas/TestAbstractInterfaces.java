@@ -1,5 +1,4 @@
 package pruebas;
-
 import org.junit.Test;
 import static org.junit.Assert.*;
 import poo.Coche;
@@ -48,5 +47,9 @@ public class TestAbstractInterfaces {
         miSupra.mostrar();
         assertEquals(miSupra.getNivDeposito(), 39, 0.01);
 
+    }
+    
+    public void interfaces() {
+        
     }
 }
