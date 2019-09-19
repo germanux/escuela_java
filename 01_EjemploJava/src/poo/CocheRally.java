@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ejemplojava;
+package poo;
 
 /**
  *
@@ -12,6 +12,10 @@ package ejemplojava;
 public class CocheRally extends Coche {
     private float rozamiento;
             
+    public CocheRally(String marca) {
+        super(marca);
+        this.rozamiento = 3.1416f;
+    }     
     public CocheRally(String marca, TipoCarburante carburante, TipoColor color, float roz) {
         super(marca, carburante, color);
         this.rozamiento = roz;

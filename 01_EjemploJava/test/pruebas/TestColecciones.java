@@ -5,10 +5,10 @@
  */
 package pruebas;
 
-import ejemplojava.Coche;
-import ejemplojava.CocheRally;
-import ejemplojava.TipoCarburante;
-import ejemplojava.TipoColor;
+import poo.Coche;
+import poo.CocheRally;
+import poo.TipoCarburante;
+import poo.TipoColor;
 import java.util.ArrayList;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -58,6 +58,22 @@ public class TestColecciones {
         cochesParaVender.add(coches[1]);
         cochesParaVender.add(coches[2]);
         
+        cochesParaVender.add(new CocheRally("Subaru Imprezza"));
+        if (cochesParaVender.contains(coches[0])) {
+            System.out.println("El coche existe");
+        }
+        TestColecciones.mostrarCoche(elMio);
+       cochesParaVender.forEach( TestColecciones::mostrarCoche );
+       // FUNCION LAMBDA
+       cochesParaVender.forEach(  (coche) -> { 
+                    System.out.println(" -> " + coche.toString());
+                });
 //        cochesParaVender.add("Que no se puede");
     }
+    public static void mostrarCoche(Coche coche) {
+        System.out.println(" -> " + coche.toString());
+    }
 }
+
+
+

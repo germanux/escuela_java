@@ -1,4 +1,4 @@
-package ejemplojava;
+package poo;
 
 public class Coche { // hereda de Object
     
