@@ -1,15 +1,18 @@
 package pruebas;
+import java.util.ArrayList;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import poo.Coche;
 import poo.CocheRally;
 import poo.Moto;
+import poo.Pelota;
+import poo.Rodable;
 import poo.TipoCarburante;
 import poo.Vehiculo;
 
 public class TestAbstractInterfaces {
     
-    @Test
+    // @Test
     public void abstractos() {
         Vehiculo miVehiculo = new Vehiculo("Fabricacion propia" ,"SIN MATRICULAR") {
             @Override
@@ -49,7 +52,29 @@ public class TestAbstractInterfaces {
 
     }
     
+    @Test
     public void interfaces() {
+        
+        Coche coche = new Coche("BMW", "5555-HHH");
+        coche.setArrancado(true);
+        coche.echarCarburante(50);
+        coche.moverse();
+        coche.mostrar();
+        Moto miMoto = new Moto("CBR 900");
+        miMoto.moverse();
+        
+        Pelota bola = new Pelota();
+        bola.moverse();
+        
+        ArrayList<Rodable> cosasQueRuedan = new ArrayList<>();
+        cosasQueRuedan.add(bola);
+        cosasQueRuedan.add(miMoto);
+        cosasQueRuedan.add(coche);
+        for (Rodable rod : cosasQueRuedan) {
+            System.out.println(">> RODANDO " + rod.toString());
+            System.out.println(" Ruedas " + rod.getNumRuedas());
+            rod.moverse();
+        }
         
     }
 }
