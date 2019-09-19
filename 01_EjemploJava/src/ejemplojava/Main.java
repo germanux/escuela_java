@@ -18,7 +18,8 @@ import poo.TipoCarburante;
 public class Main {
 
     public static void main(String[] args) {
-        ProbandoString.tratarCadenas();
+        // ProbandoString.tratarCadenas();
+        mainCoches(args);
     }
     /**
      * @param args the command line arguments
@@ -38,7 +39,7 @@ public class Main {
         
         System.out.println("Todos los coches tienen: " + Coche.CAPACIDAD_DEPOSITO);
         System.out.println("Coche creado: " + miCoche.getMarca());
-        System.out.println("Nivel deposito: " + miCoche.getNivelDep() + " litros");
+        System.out.println("Nivel deposito: " + miCoche.getNivDeposito() + " litros");
         
         
         Coche otroCoche = miCoche; // new Coche();
@@ -46,7 +47,7 @@ public class Main {
         System.out.println("Coche creado: " + otroCoche.getMarca());
         // vaciarDeposito(miCoche);
         miCoche.vaciarDeposito();
-        System.out.println("Nivel deposito: " + otroCoche.getNivelDep() + " litros");
+        System.out.println("Nivel deposito: " + otroCoche.getNivDeposito()+ " litros");
         
         miCoche.setArrancado(true);
         miCoche.echarCarburante(-2);
@@ -74,7 +75,8 @@ public class Main {
         CocheRally cr = (CocheRally) supraNormal;   // Conversión explícita ó casting
         System.out.println("Y el rozamiento?? " + cr.getRozamiento());
         
-        cr = (CocheRally) miCoche;
-        System.out.println("Y el rozamiento?? " + cr.getRozamiento());
+        // Esto lanza excepcion:        
+       /* cr = (CocheRally) miCoche;
+        System.out.println("Y el rozamiento?? " + cr.getRozamiento());*/
     }    
 }

@@ -11,9 +11,17 @@ package poo;
  */
 public class Moto extends Vehiculo {
 
+    public Moto(String marca) {
+        super(marca, "SIN MATRICULAR");
+    }
     @Override
-    public void abrirPuerta() {
-        System.out.println("Loco, no hay puertas, no te tires");
+    public void abrirPuerta() {        
+        // System.out.println(  "Loco, no hay puertas, no te tires");
+    }
+
+    @Override
+    public void acelerar() {
+        System.out.println("Moto " + getMatricula() + "acelerando ");
     }
     
 }
