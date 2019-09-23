@@ -25,15 +25,28 @@ class Calculadora {
     operadorPulsado(evObj) {
         let operadorActual = evObj.currentTarget.innerHTML;        
         
-        if (this.operador !== "") {
+        if (this.operador !== "" || operadorActual === "=") {
+            this.calcular();
+        }
+        this.mem = parseFloat(this.result.value);
+        // Subir a caja texto valor anterior y operador
+        
+        if (this.operador !== "=" && operadorActual !== "=") {
+            this.anterior.value = `${this.mem} ${operadorActual}`;
+            this.result.value = "0";
+            this.operador = operadorActual;
+        } else {
+            this.operador = "";
+            // this.result.anterior.value = this.result.value
+        }
+        this.nuevoNum = true;
+    }
+    calcular() {        
+        if (this.operador !== "=") {
             let valActual = parseFloat(this.result.value);
             let resultado = eval(this.mem.toString() + this.operador + valActual);
             this.result.value = resultado;
         }
-        this.mem = parseFloat(this.result.value);
-        this.anterior.value = `${this.mem} ${operadorActual}`;
-        this.operador = operadorActual;
-        this.nuevoNum = true;
     }
 };
 let calculadora = null;
