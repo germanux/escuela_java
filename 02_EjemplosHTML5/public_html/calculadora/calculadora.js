@@ -20,6 +20,7 @@ class Calculadora {
                 this.result.value += valor;
         } else {
             this.result.value += valor;
+            this.result.value = parseFloat(this.result.value);
         }
     }
     operadorPulsado(evObj) {
@@ -42,7 +43,7 @@ class Calculadora {
         this.nuevoNum = true;
     }
     calcular() {        
-        if (this.operador !== "=") {
+        if ( this.operador !== "" && this.operador !== "=") {
             let valActual = parseFloat(this.result.value);
             let resultado = eval(this.mem.toString() + this.operador + valActual);
             this.result.value = resultado;
