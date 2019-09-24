@@ -21,9 +21,11 @@ import java.util.logging.Logger;
  * @author alumno
  */
 public abstract class HiloFichero {
+    protected IStringAux strAux;
     
-    //IStringAux strAux;
-    
+    public HiloFichero(IStringAux strAux ) {
+        this.strAux = strAux;
+    }
     
     public /* static */ void crearFicheroEjem(String rutaFich) /*
     throws IOException */ {
@@ -81,7 +83,9 @@ public abstract class HiloFichero {
             while (escaner.hasNextLine()) {
                 String linea = escaner.nextLine();
                 // StringAux strAux = new StringAux(linea);
-                System.out.println(quitarEspacios(linea));
+                // System.out.println(quitarEspacios(linea));
+                 System.out.println(strAux.quitarEspacios(linea));
+                
             }
         } catch(Exception ex) {
             System.err.println("Error: " + ex.getMessage());

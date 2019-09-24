@@ -12,9 +12,9 @@ package threads;
 public class FactoriaHiloFich {
    
     public static HiloFichero HiloFichero1() {
-        return new HiloFicheroStrAuxV1();
+        return new HiloFicheroStrAuxV1(new StringAuxV1());
     }
     public static HiloFichero HiloFichero2() {
-        return new HiloFicheroStrAuxV2();
+        return new HiloFicheroStrAuxV2(new StringAuxV1());
     }
 }

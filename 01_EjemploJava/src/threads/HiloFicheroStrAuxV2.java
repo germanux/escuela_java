@@ -13,6 +13,10 @@ import clasesjava.StringAux;
  */
 public class HiloFicheroStrAuxV2 extends HiloFichero {
 
+    public HiloFicheroStrAuxV2(IStringAux strAux) {
+        super(strAux);
+    }
+
     @Override
     protected String quitarEspacios(String s) {
         return StringAux.quitarEspSobrantesV2(s);
