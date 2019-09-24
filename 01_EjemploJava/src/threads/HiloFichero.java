@@ -5,11 +5,14 @@
  */
 package threads;
 
+import clasesjava.StringAux;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.Random;
+import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -17,8 +20,12 @@ import java.util.logging.Logger;
  *
  * @author alumno
  */
-public class HiloCrearFichero {
-    public static void crearFicheroEjem(String rutaFich) /*
+public abstract class HiloFichero {
+    
+    //IStringAux strAux;
+    
+    
+    public /* static */ void crearFicheroEjem(String rutaFich) /*
     throws IOException */ {
         String[] palabras = new String['Z' - 'A' + 1];
         Random r = new Random(new Date().getTime());
@@ -53,11 +60,39 @@ public class HiloCrearFichero {
             System.err.println("Otro error: " + ex.getMessage());
         } finally {
             try {
-                fich.close();
+                if (fich != null)
+                    fich.close();
             } catch (IOException ex) {
-                Logger.getLogger(HiloCrearFichero.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(HiloFichero.class.getName()).log(Level.SEVERE, null, ex);
+            } /*catch (NullPointerException ex) {
+                Logger.getLogger(HiloCrearFichero.class.getName()).log(Level.SEVERE, null, ex); /*catch (NullPointerException ex) {
+                Logger.getLogger(HiloFichero.class.getName()).log(Level.SEVERE, null, ex);
+            }*/
+        }        
+    }
+    
+    protected abstract String quitarEspacios(String s);
+    
+    public void leerFicheroEjem(String rutaFich) {
+        File fich = new File(rutaFich);
+        Scanner escaner = null;
+        try {
+            escaner = new Scanner(fich);
+            while (escaner.hasNextLine()) {
+                String linea = escaner.nextLine();
+                // StringAux strAux = new StringAux(linea);
+                System.out.println(quitarEspacios(linea));
+            }
+        } catch(Exception ex) {
+            System.err.println("Error: " + ex.getMessage());
+        } finally {
+            try {
+                if (escaner != null) {
+                    escaner.close();
+                }
+            } catch (Exception ex) {
+                Logger.getLogger(HiloFichero.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        
     }
 }
