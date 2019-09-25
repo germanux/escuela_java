@@ -23,6 +23,7 @@ import java.util.logging.Logger;
 public abstract class HiloFichero {
     protected IStringAux strAux;
     
+    
     public HiloFichero(IStringAux strAux ) {
         this.strAux = strAux;
     }
