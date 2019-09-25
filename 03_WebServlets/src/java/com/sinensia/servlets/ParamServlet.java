@@ -40,21 +40,22 @@ public class ParamServlet extends HttpServlet {
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Introduzca sus datos</h1>");
-            // Formulario que se muestre cuando es GET
-            out.println("<form name='form1' method='get' action='./param'>");
-            
-            out.println("<table border='1'>");  // TR = fila
-            out.println("<tr><td>Nombre:</td>");   // TD = columna
-            out.println("<td><input type='text' name='nombre' id='nombre'/></td></tr>");
-            out.println("<tr><td>Edad:</td>");   // TD = columna
-            out.println("<td><input type='number' name='edad' id='edad'/></td></tr>");
-            out.println("</table>");
-            out.println("<input type='submit' value='Enviar'/> ");            
-            out.println("</form>");
-            // Recogida de datos cuando es POST
+            /*if (metodo.equals("GET")) {
+                // Formulario que se muestre cuando es GET
+                out.println("<form name='form1' method='post' action='./param'>");            
+                out.println("<table border='1'>");  // TR = fila
+                out.println("<tr><td>Nombre:</td>");   // TD = columna
+                out.println("<td><input type='text' name='nombre' id='nombre'/></td></tr>");
+                out.println("<tr><td>Edad:</td>");   // TD = columna
+                out.println("<td><input type='number' name='edad' id='edad'/></td></tr>");
+                out.println("</table>");
+                out.println("<input type='submit' value='Enviar'/> ");            
+                out.println("</form>");
+            } else  if (metodo.equals("POST")) {*/
+                // Recogida de datos cuando es POST
             out.println("<p>Te llamas " + request.getParameter("nombre") + "</p>");
             out.println("<p>Y tienes " + request.getParameter("edad") + " años</p>");
-            
+            //}
             out.println("</body>");
             out.println("</html>");
         }
