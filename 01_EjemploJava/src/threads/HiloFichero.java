@@ -85,8 +85,8 @@ public abstract class HiloFichero {
                 String linea = escaner.nextLine();
                 // StringAux strAux = new StringAux(linea);
                 // System.out.println(quitarEspacios(linea));
-                 System.out.println(strAux.quitarEspacios(linea));
-                
+                 // System.out.println(strAux.quitarEspacios(linea));
+                quitarEspacios(linea);
             }
         } catch(Exception ex) {
             System.err.println("Error: " + ex.getMessage());

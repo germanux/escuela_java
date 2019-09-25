@@ -20,7 +20,7 @@ public class HiloFicheroStrAuxV1 extends HiloFichero {
     @Override
     protected String quitarEspacios(String s) {
         //return strAux.quitarEspacios(s);
-        return StringAux.quitarEspSobrantesV1(s);
+        return StringAux.quitarEspSobrantes(s);
     }
     
 }
