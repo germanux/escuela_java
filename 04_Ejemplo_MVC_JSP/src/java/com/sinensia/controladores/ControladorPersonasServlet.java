@@ -5,6 +5,7 @@
  */
 package com.sinensia.controladores;
 
+import com.sinensia.modelo.Persona;
 import com.sinensia.modelo.logica.ServicioPersona;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -31,7 +32,13 @@ public class ControladorPersonasServlet extends HttpServlet {
         String nombre = request.getParameter("nombre"); // name del INPUT
         String edad = request.getParameter("edad"); 
         
-        ServicioPersona.getInstancia().addPersonas(nombre, edad);
+        Persona p = ServicioPersona.getInstancia().addPersonas(nombre, edad);
+        if (p == null) {
+            
+            request.getRequestDispatcher("error.jsp").forward(request, response);
+        } else {
+             request.getRequestDispatcher("exito.jsp").forward(request, response);          
+        }
     }
 
     /**

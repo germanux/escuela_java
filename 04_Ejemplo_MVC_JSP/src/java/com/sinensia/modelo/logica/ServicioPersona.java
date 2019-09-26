@@ -27,15 +27,17 @@ public class ServicioPersona {
     
     private ArrayList<Persona> personas;
     
-    public void addPersonas(String nombre, String edad) {
+    public Persona addPersonas(String nombre, String edad) {
         //try {
             int intEdad = Integer.parseInt(edad);
             if (intEdad > 12 && !nombre.equals("")) {
                 Persona p = new Persona(nombre, intEdad);
                 personas.add(p);
+                return p;
             }
         /*} catch (NumberFormatException numberFormatException) {
         }*/
+        return null;
     }
     public Persona getPersona(String nombre) {
         for (Persona p : personas) {
