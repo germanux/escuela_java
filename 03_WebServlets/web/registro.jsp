@@ -1,17 +1,8 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@include file="head.jsp" %>
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
+<%-- Pagina de inicio usando includes y funciones --%>
 <html>
-    <head>
-        <title>Registro</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="./estilos/estilos.jsp"/>   
-    </head>
+    <%= head("Registro") %>
     <body>
         <%@include file="header.jsp" %>
         <form name='form1' method='post' action='./param.jsp'>            
