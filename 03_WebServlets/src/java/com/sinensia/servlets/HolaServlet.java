@@ -9,6 +9,14 @@ import javax.servlet.http.HttpServletResponse;
 
 public class HolaServlet extends HttpServlet {
 
+    private String propiedad;
+    private static int contador;
+    
+    public HolaServlet() {
+        super();
+        contador++;
+        propiedad = "Valor " + contador;
+    } 
     @Override
     protected void doGet(HttpServletRequest peticion, HttpServletResponse respuesta) 
             throws ServletException, IOException {
@@ -21,7 +29,7 @@ public class HolaServlet extends HttpServlet {
             salida.println("<head><title>HTML creado desde Servlet</title>");
             
             salida.println("<body>");
-            salida.println("<h1>HTML creado desde Servlet</h1>");
+            salida.println("<h1>HTML creado desde Servlet " + propiedad + "</h1>");
             salida.println("<p>Ruta: " + ruta + "</p>");
             salida.println("<ul>");
             for (int i = 0; i < 10; i++)
