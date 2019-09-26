@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.sinensia.modelo.servicios;
+package com.sinensia.modelo.logica;
 
 import com.sinensia.modelo.Persona;
 import java.util.ArrayList;
@@ -36,5 +36,13 @@ public class ServicioPersona {
             }
         /*} catch (NumberFormatException numberFormatException) {
         }*/
+    }
+    public Persona getPersona(String nombre) {
+        for (Persona p : personas) {
+            if (p.getNombre().equalsIgnoreCase(nombre)) {
+                return p;
+            }
+        }
+        return null;
     }
 }
