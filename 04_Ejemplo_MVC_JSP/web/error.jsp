@@ -13,5 +13,9 @@
     </head>
     <body>
         <h1>Error en registro</h1>
+        Error: 
+        <span style="color: red">
+            <%= /*request.getSession()*/ session.getAttribute("mensajeError") %>                    
+        </span>
     </body>
 </html>
