@@ -1,0 +1,27 @@
+Ejercicios, por parejas:
+
+ - Añadir el campo email a la entidad Persona.
+ - Añadir el campo password a la entidad Persona.
+	* Lo ideal sería que estos campos se validaran con una expresión regular, como la de quitarEspacios pero buscandola en Internet		email@dominio.es  por ejem.
+	
+ - Funcionalidad para poder modificar una Persona.
+		* Que se pueda modificar cualquier campo
+ - Funcionalidad para poder eliminar una Persona.
+		* Lo suyo sería usar los http - put y delete, pero no se puede formulario. Entonces añadir el campo hidden "metodo" e implementar en doPost esto.
+		
+ - Mejorar el buscador para que también busque por email.
+ - Nuevo buscador para que pueda mostrar varias personas.
+ 
+Actividades propuestas una vez terminada (a elegir):
+ - Ponerlo bonito (estilos CSS, algo de JavaScript, mensajes, reducir clicks con botones en el listado...).
+ - Implementar las operaciones CRUD de otra entidad (por ejemplo Animales con campos "especie", "pesoMedio" (float), "esVolador" (boolean), fechaModificacion (Date)) , pero en modo programación por parejas en un único ordenador (mientras uno programa el otro asiste y a intervalos intercambiar los roles).
+ - Leer artículos de la web https://97cosas.com/programador/
+ - Redactar un informe explicando qué funcionalidades se han realizado, como se han diseñado (también valen diagramas) y cómo se han implementado. 
+ - Progamar un minijuego como El Ahorcado. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
