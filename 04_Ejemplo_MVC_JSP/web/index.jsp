@@ -14,16 +14,27 @@
                     <td><input type='text' name='nombre' id='nombre'/></td></tr>
                 <tr><td>Edad:</td>  
                     <td><input type='number' name='edad' id='edad'/></td></tr>
+                <tr><td>Edad:</td>  
+                    <td><input type='hidden' name='metodo' id='metodo' value="modificar"/></td></tr>
             </table>
             <input type='submit' value='Enviar'/>             
         </form>
         <h2>Buscar persona</h2>
-        <form name='formBusq' method='get' action='./personas.do'>            
+        <form name='formBusq' method='get' action='./personas.do' onsubmit="mira()">            
             <table border='1'>
                 <tr><td>Nombre:</td>  
                     <td><input type='text' name='nombre' id='nombre'/></td>
-                    <td><input type='submit' value='Buscar'/>  </td></tr>
+                    <td><input type='submit' name='metodo' value='Buscar'/>
+                    <td><input type='submit' name='metodo' value='Modificar'/>  </td></tr>
             </table>                       
         </form>
+        <script>
+            // id y name para navegador
+            // name para enviar parámetros
+            function mira() {
+                alert(document.formBusq.nombre.value);
+                return true;
+            }
+        </script>
     </body>
 </html>
