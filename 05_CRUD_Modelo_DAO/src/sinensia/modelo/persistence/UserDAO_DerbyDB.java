@@ -54,12 +54,43 @@ public class UserDAO_DerbyDB implements IUserDAO {
         prepStmt.setString(3, user.getName());
         prepStmt.setInt(4, user.getAge());
         prepStmt.executeUpdate();
+
+        // Aquí buscamos el Id a través del email
+        /*String sqlQueryBusqId = "SELECT id FROM users WHERE email=?";
+        PreparedStatement prepStmtBusqId = con.prepareCall(sqlQueryBusqId);
+        prepStmtBusqId.setString(1, user.getEmail());
+        ResultSet res = prepStmtBusqId.executeQuery();
+        while (res.next()) {
+            int id = res.getInt("id");
+            user.setId(id);
+        }*/
+        user.setId(getOneByEmail(user.getEmail()).getId());
         con.close();
+        // Devolvemos el usuario, con el Id que lo hemos buscado en la bbdd
         return user;
     }
 
+    public User getOneByEmail(String email) throws SQLException {
+        try (Connection con = DriverManager.getConnection(CONEX_DB, USER_DB, PSSWD_DB)) {
+            String sqlQueryBusqId = "SELECT id, password, name, age FROM users WHERE email=?";
+            PreparedStatement prepStmtBusqId = con.prepareCall(sqlQueryBusqId);
+            prepStmtBusqId.setString(1, email);
+            ResultSet res = prepStmtBusqId.executeQuery();
+             while (res.next()) {
+                int id = res.getInt("id");
+                String password = res.getString("password");
+                String name = res.getString("name");
+                int age = res.getInt("age");
+                User user = new User(email, password, name, age);
+                user.setId(id);
+                return user;
+             }
+        }
+        return null;
+    }
+
     @Override
-    public List<User> getAll() throws SQLException  {
+    public List<User> getAll() throws SQLException {
         try (Connection con = DriverManager.getConnection(CONEX_DB, USER_DB, PSSWD_DB)) {
 
             ArrayList<User> usersList = new ArrayList<>();
@@ -77,16 +108,19 @@ public class UserDAO_DerbyDB implements IUserDAO {
                 usersList.add(newUser);
             }
             return usersList;
-        } 
+        }
     }
 
     @Override
     public boolean remove(int id) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Connection con = DriverManager.getConnection(CONEX_DB, USER_DB, PSSWD_DB);
+        String sqlQuery = "DELETE FROM users WHERE id = ?";
+        PreparedStatement prepStmt = con.prepareCall(sqlQuery);
+        prepStmt.setInt(1, id);
+        int count = prepStmt.executeUpdate();
+        // if (count == 1) return true; else return false;
+        return count == 1;
+
     }
 
-    @Override
-    public boolean remove(User user) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 }

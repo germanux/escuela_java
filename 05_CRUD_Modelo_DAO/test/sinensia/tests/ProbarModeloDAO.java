@@ -89,14 +89,23 @@ public class ProbarModeloDAO {
             assertFalse(u4.getAge() != 50);
             
             // Repetido que debe fallar
-            User u5 = userSrv.create("ddd@mail.com", "d1234", "D. D. Dd", 50);
-            assertNull(u5);
+            try {
+                User u5 = userSrv.create("ddd@mail.com", "d1234", "D. D. Dd", 50);
+                fail("No debe crearse usuario, está duplicado");
+            } catch (Exception e) {                
+            }
             
             allUsers = userSrv.getAll();
             assertEquals(totalUsersBefore + 4, allUsers.size());
             
-            // Eliminar los 4 usuarios creados
-            
+            // Eliminar los 4 usuarios creados:
+            //   Debemos devolver el Id en el objeto usuario creado
+            //   Para poder devolver el Id habrá que preguntar a la bbdd por email
+            //   Y entonces ya podremos eliminar por Id. Incluso por email...
+            userSrv.remove(u1.getId());
+            userSrv.remove(u2.getId());
+            userSrv.remove(u3.getId());
+            userSrv.remove(u4.getId());
             
             allUsers = userSrv.getAll();
             assertEquals(totalUsersBefore, allUsers.size());

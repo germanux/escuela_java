@@ -40,4 +40,7 @@ public class UserService {
     public List<User> getAll() throws SQLException {
         return daoUsers.getAll();
     }
+    public boolean remove(int id)throws SQLException {
+        return daoUsers.remove(id);
+    }
 }
