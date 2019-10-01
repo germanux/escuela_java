@@ -5,11 +5,13 @@
  */
 package sinensia.modelo;
 
+import java.io.Serializable;
+
 /** Clase que define los campos de los usuarios
  *
  * @author alumno
  */
-public class User {
+public class User implements Serializable {
     
     private Integer id;
 
