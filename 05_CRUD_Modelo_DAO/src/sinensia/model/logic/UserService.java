@@ -16,31 +16,62 @@ import sinensia.modelo.persistence.UserDAO_DerbyDB;
  * @author alumno
  */
 public class UserService {
-    
+
     IUserDAO daoUsers;
-    
+
     public UserService(IUserDAO daoUsers) {
         this.daoUsers = daoUsers;
     }
 
-    public User create(String email, String password, String name, int edad) throws SQLException {
-        User u = null;
-        if (email != null && password != null && name != null) {
-            if (email.length() > 3
-                    && !password.equals("")
-                    && !name.equals("")
-                    && edad > 0) {
+    public boolean validate(String email, String password, String name, String strEdad) {
+        if (email != null && password != null && name != null && strEdad != null) {
+            if (!strEdad.matches("[0-9]{1,3}")) {
+                throw new IllegalArgumentException("La edad no es un número válido");
+            } else {
+                int edad = Integer.parseInt(strEdad);
+                if (email.length() > 3
+                        && !password.equals("")
+                        && !name.equals("")
+                        && edad > 0) {
 
-                u = new User(email, password, name, edad);
-                u = daoUsers.create(u);
-            }            
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public User create(String email, String password, String name, String strEdad) throws SQLException {
+        User u = null;
+        if (validate(email, password, name, strEdad)) {
+            int edad = Integer.parseInt(strEdad);
+            u = new User(email, password, name, edad);
+            u = daoUsers.create(u);
         }
         return u;
     }
+
     public List<User> getAll() throws SQLException {
         return daoUsers.getAll();
     }
-    public boolean remove(int id)throws SQLException {
+
+    public boolean remove(int id) throws SQLException {
         return daoUsers.remove(id);
+    }
+
+    public User update(User user) throws SQLException {
+        return update(user.getId(), user.getEmail(), user.getPassword(),
+                user.getName(), Integer.toString(user.getAge()));
+    }
+
+    public User update(int id, String email, String password, String name, String strEdad) throws SQLException {
+        User u = null;
+        if (validate(email, password, name, strEdad)) {
+            int edad = Integer.parseInt(strEdad);
+            u = new User(email, password, name, edad);
+
+            u = daoUsers.update(u);
+        }
+        return u;
     }
 }

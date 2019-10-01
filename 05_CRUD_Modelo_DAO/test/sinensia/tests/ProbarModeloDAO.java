@@ -15,6 +15,8 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.FixMethodOrder;
+import org.junit.runners.MethodSorters;
 import sinensia.model.logic.UserService;
 import sinensia.modelo.User;
 import sinensia.modelo.persistence.IUserDAO;
@@ -24,19 +26,12 @@ import sinensia.modelo.persistence.UserDAO_DerbyDB;
  *
  * @author alumno
  */
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class ProbarModeloDAO {
 
     UserService userSrv;
 
     public ProbarModeloDAO() {
-    }
-
-    @BeforeClass
-    public static void setUpClass() {
-    }
-
-    @AfterClass
-    public static void tearDownClass() {
     }
 
     @Before
@@ -50,16 +45,16 @@ public class ProbarModeloDAO {
     }
 
     @Test
-    public void createAndListUsersFail() {
+    public void TestModel_02_createAndListUsersFail() {
         List<User> allUsers;
         try {
             allUsers = userSrv.getAll();
             int totalUsersBefore = allUsers.size();
-            User u1 = userSrv.create(null, null, null, 0);
-            User u2 = userSrv.create("", "p1234", "J J", 20);
-            User u3 = userSrv.create("er@dd", null, "J J", 20);
-            User u4 = userSrv.create("er@dd", "p1234", "", 20);
-            User u5 = userSrv.create("er@dd", "p1234", "J J", 0);
+            User u1 = userSrv.create(null, null, null, "0");
+            User u2 = userSrv.create("", "p1234", "J J", "20");
+            User u3 = userSrv.create("er@dd", null, "J J", "20");
+            User u4 = userSrv.create("er@dd", "p1234", "", "2");
+            User u5 = userSrv.create("er@dd", "p1234", "J J", "0");
             assertNull(u1);
             assertNull(u2);
             assertNull(u3);
@@ -75,14 +70,14 @@ public class ProbarModeloDAO {
     }
 
     @Test
-    public void createAndListUsersOK() {
+    public void TestModel_01_createAndListUsersOK() {
         try {
             List<User> allUsers = userSrv.getAll();
             int totalUsersBefore = allUsers.size();
-            User u1 = userSrv.create("aaa@mail.com", "a1234", "Aaaaa", 20);
-            User u2 = userSrv.create("bbb@mail.com", "b1234", "B. Bbbb", 30);
-            User u3 = userSrv.create("ccc@mail.com", "c1234", "Cccc C.", 40);
-            User u4 = userSrv.create("ddd@mail.com", "d1234", "D. D. Dd", 50);
+            User u1 = userSrv.create("aaa@mail.com", "a1234", "Aaaaa", "20");
+            User u2 = userSrv.create("bbb@mail.com", "b1234", "B. Bbbb", "30");
+            User u3 = userSrv.create("ccc@mail.com", "c1234", "Cccc C.", "40");
+            User u4 = userSrv.create("ddd@mail.com", "d1234", "D. D. Dd", "50");
             assertNotNull(u1);
             assertEquals("B. Bbbb", u2.getName());
             assertTrue("ccc@mail.com".equals(u3.getEmail()));
@@ -90,7 +85,7 @@ public class ProbarModeloDAO {
             
             // Repetido que debe fallar
             try {
-                User u5 = userSrv.create("ddd@mail.com", "d1234", "D. D. Dd", 50);
+                User u5 = userSrv.create("ddd@mail.com", "d1234", "D. D. Dd", "50");
                 fail("No debe crearse usuario, está duplicado");
             } catch (Exception e) {                
             }

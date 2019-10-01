@@ -76,7 +76,7 @@ public class UserDAO_DerbyDB implements IUserDAO {
             PreparedStatement prepStmtBusqId = con.prepareCall(sqlQueryBusqId);
             prepStmtBusqId.setString(1, email);
             ResultSet res = prepStmtBusqId.executeQuery();
-             while (res.next()) {
+            while (res.next()) {
                 int id = res.getInt("id");
                 String password = res.getString("password");
                 String name = res.getString("name");
@@ -84,7 +84,7 @@ public class UserDAO_DerbyDB implements IUserDAO {
                 User user = new User(email, password, name, age);
                 user.setId(id);
                 return user;
-             }
+            }
         }
         return null;
     }
@@ -121,6 +121,26 @@ public class UserDAO_DerbyDB implements IUserDAO {
         // if (count == 1) return true; else return false;
         return count == 1;
 
+    }
+
+    @Override
+    public User update(User user) throws SQLException {
+        try (Connection con = DriverManager.getConnection(CONEX_DB, USER_DB, PSSWD_DB)) {
+            String sqlQuery = "UPDATE  users SET email = ?, password = ?, name = ?, age = ? "
+                    + " WHERE id = ?";
+            PreparedStatement prepStmt = con.prepareCall(sqlQuery);
+            prepStmt.setString(1, user.getEmail());
+            prepStmt.setString(2, user.getPassword());
+            prepStmt.setString(3, user.getName());
+            prepStmt.setInt(4, user.getAge());
+            prepStmt.setInt(5, user.getId());
+            int count = prepStmt.executeUpdate();
+            if (count == 1) {
+                return getOneByEmail(user.getEmail()); // ó return user;
+            } else {
+                return null;
+            }
+        }
     }
 
 }
