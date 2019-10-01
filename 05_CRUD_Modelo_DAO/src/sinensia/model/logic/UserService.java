@@ -60,8 +60,13 @@ public class UserService {
     }
 
     public User update(User user) throws SQLException {
-        return update(user.getId(), user.getEmail(), user.getPassword(),
-                user.getName(), Integer.toString(user.getAge()));
+        
+        if (validate(user.getEmail(), user.getPassword(), user.getName(), 
+                Integer.toString(user.getAge()))) {
+            return daoUsers.update(user);
+        } else {
+            return null;
+        }
     }
 
     public User update(int id, String email, String password, String name, String strEdad) throws SQLException {
@@ -69,7 +74,7 @@ public class UserService {
         if (validate(email, password, name, strEdad)) {
             int edad = Integer.parseInt(strEdad);
             u = new User(email, password, name, edad);
-
+            u.setId(id);
             u = daoUsers.update(u);
         }
         return u;

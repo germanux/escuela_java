@@ -45,7 +45,7 @@ public class ProbarModeloDAO {
     }
 
     @Test
-    public void TestModel_02_createAndListUsersFail() {
+    public void TestModel_01_createAndListUsersFail() {
         List<User> allUsers;
         try {
             allUsers = userSrv.getAll();
@@ -66,11 +66,11 @@ public class ProbarModeloDAO {
             Logger.getLogger(ProbarModeloDAO.class.getName()).log(Level.SEVERE, null, ex);
             fail("Error en SQL: " + ex.getMessage());
         }
-        
+
     }
 
     @Test
-    public void TestModel_01_createAndListUsersOK() {
+    public void TestModel_02_createAndListUsersOK() {
         try {
             List<User> allUsers = userSrv.getAll();
             int totalUsersBefore = allUsers.size();
@@ -82,17 +82,17 @@ public class ProbarModeloDAO {
             assertEquals("B. Bbbb", u2.getName());
             assertTrue("ccc@mail.com".equals(u3.getEmail()));
             assertFalse(u4.getAge() != 50);
-            
+
             // Repetido que debe fallar
             try {
                 User u5 = userSrv.create("ddd@mail.com", "d1234", "D. D. Dd", "50");
                 fail("No debe crearse usuario, está duplicado");
-            } catch (Exception e) {                
+            } catch (Exception e) {
             }
-            
+
             allUsers = userSrv.getAll();
             assertEquals(totalUsersBefore + 4, allUsers.size());
-            
+
             // Eliminar los 4 usuarios creados:
             //   Debemos devolver el Id en el objeto usuario creado
             //   Para poder devolver el Id habrá que preguntar a la bbdd por email
@@ -101,14 +101,58 @@ public class ProbarModeloDAO {
             userSrv.remove(u2.getId());
             userSrv.remove(u3.getId());
             userSrv.remove(u4.getId());
-            
+
             allUsers = userSrv.getAll();
             assertEquals(totalUsersBefore, allUsers.size());
             // Comprobar que se han eliminado
-            
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ProbarModeloDAO.class.getName()).log(Level.SEVERE, null, ex);
+            fail("Error en SQL: " + ex.getMessage());
+        }
+    }
+
+    @Test
+    public void TestModel_03_createAndUpdateUsersOK() {
+        try {
+            User u1 = userSrv.create("aaa@mail.com", "a1234", "Aaaaa", "20");
+            User u2 = userSrv.create("bbb@mail.com", "b1234", "B. Bbbb", "30");
+            u1.setName("AAA AAA");
+            u1 = userSrv.update(u1);
+            u2 = userSrv.update(u2.getId(), "BBB@mail.com", "1234BBBB", u2.getName(), "99");
+
+            assertEquals("AAA AAA", u1.getName());
+            assertEquals("BBB@mail.com", u2.getEmail());
+            assertEquals("1234BBBB", u2.getPassword());
+            assertEquals(99, u2.getAge());
+            userSrv.remove(u1.getId());
+            userSrv.remove(u2.getId());
+        } catch (SQLException ex) {
+            Logger.getLogger(ProbarModeloDAO.class.getName()).log(Level.SEVERE, null, ex);
+            fail("Error en SQL: " + ex.getMessage());
+        }
+    }
+    
+    @Test
+    public void TestModel_04_createAndUpdateUsersFail() {
+        User u1 = null;
+        User u2 = null;
+        try {
+            u1 = userSrv.create("aaa@mail.com", "a1234", "Aaaaa", "20");
+            u2 = userSrv.create("bbb@mail.com", "b1234", "B. Bbbb", "30");
+            // Debe fallar
+            u2 = userSrv.update(u2.getId(), "aaa@mail.com", "1234BBBB", u2.getName(), "99");
+            fail("Error, no ha fallado la clave email duplicada");
+        }catch (SQLException ex) {
+            Logger.getLogger(ProbarModeloDAO.class.getName()).log(Level.SEVERE, null, ex);            
+        }
+        try {
+            userSrv.remove(u1.getId());
+            userSrv.remove(u2.getId());
         } catch (SQLException ex) {
             Logger.getLogger(ProbarModeloDAO.class.getName()).log(Level.SEVERE, null, ex);
             fail("Error en SQL: " + ex.getMessage());
         }
     }
 }
+
