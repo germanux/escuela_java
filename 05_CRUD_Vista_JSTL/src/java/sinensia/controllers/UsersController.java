@@ -50,6 +50,9 @@ public class UsersController extends HttpServlet {
             String method = req.getParameter("method");
             if ("Delete".equals(method)) {
                 userSrv.remove(Integer.parseInt(id));
+            } else if ("Update".equals(method)) {
+                User updUsr = userSrv.update(Integer.parseInt(id), email, password, name, age);
+                req.setAttribute("user", updUsr);
             } else {
                 User newUser = userSrv.create(email, password, name, age);
                 req.setAttribute("user", newUser);
