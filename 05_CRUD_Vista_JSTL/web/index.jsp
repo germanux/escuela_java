@@ -13,6 +13,7 @@
         <ul>
             <li> <a href="register.jsp">Register</a> </li>
             <li> <a href="users.do">Users list</a> </li>
+            <li> <a href="restClient.html">Rest Client with AJAX</a> </li>
         </ul>
         <form id="formLogin" action="users.do" method="get">
 
