@@ -19,16 +19,22 @@
     <body>
         <h1>Users list</h1>
         <%-- ${} corresponde a EL (Expression Language) de JSTL --%>
-        <table>
-            <c:forEach items="${usersList}" var="user">
-                <tr>
-                    <td>${user.id}</td>
-                    <td>${user.email}</td>
-                    <td>${user.password}</td>
-                    <td>${user.name}</td>
-                    <td>${user.age}</td>
-                </tr>
-            </c:forEach>
-        </table>
+        
+        <c:forEach items="${usersList}" var="user">
+            <form action="users.do" method="post">
+                <table>
+                    <tr>
+                        <td><input id="id" name="id" 
+                                   readonly type="number" size="4" 
+                                   value="${user.id}"/></td>
+                        <td>${user.email}</td>
+                        <td>${user.password}</td>
+                        <td>${user.name}</td>
+                        <td>${user.age}</td>
+                        <td><input name="method" type="submit" value="Delete"/></td>
+                    </tr>
+                </table>
+            </form>
+        </c:forEach>
     </body>
 </html>

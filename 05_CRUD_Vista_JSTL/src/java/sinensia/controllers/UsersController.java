@@ -41,14 +41,24 @@ public class UsersController extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) 
             throws ServletException, IOException {        
         try {
+            String id = req.getParameter("id");
             String email = req.getParameter("email");
             String password = req.getParameter("password");
             String name = req.getParameter("name");
             String age = req.getParameter("age");
 
-            userSrv.create(email, password, name, age);
-        } catch (SQLException ex) {
+            String method = req.getParameter("method");
+            if ("Delete".equals(method)) {
+                userSrv.remove(Integer.parseInt(id));
+            } else {
+                User newUser = userSrv.create(email, password, name, age);
+                req.setAttribute("user", newUser);
+            }
+        } catch (Exception ex) {
             Logger.getLogger(UsersController.class.getName()).log(Level.SEVERE, null, ex);
+            req.setAttribute("errorMessage", ex.getMessage());
+        } finally {
+            req.getRequestDispatcher("result.jsp").forward(req, resp);
         }
     }
 
