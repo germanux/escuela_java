@@ -78,6 +78,10 @@ public class UsersController extends HttpServlet {
                     resp.addCookie(new Cookie("email", email));
                     req.getRequestDispatcher("result.jsp").forward(req, resp);
                 } else {
+                    req.getSession().removeAttribute("userLogged");
+                    Cookie coEmail = new Cookie("email", null);
+                    coEmail.setMaxAge(0);
+                    resp.addCookie(coEmail);
                     throw new Exception("Error en email y password");
                 }
             } else {
