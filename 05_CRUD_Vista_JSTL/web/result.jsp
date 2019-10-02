@@ -14,7 +14,20 @@
     </head>
     <body>
         <h1>Result</h1>
-        <a href="index.html">Inicio</a>
+        <a href="index.jsp">Inicio</a>
+        
+        
+        <c:catch var="loginException">
+            <jsp:useBean id="userLogged" type="sinensia.modelo.User" 
+                         scope="session">
+                <jsp:getProperty property="*" name="userLogged"/>
+            </jsp:useBean>
+            <p>Usuario logueado: ${userLogged.email}</p>
+        </c:catch>
+        <c:if test="${not empty loginException}">   
+            <p>Error on LOGIN</p>
+        </c:if>
+        
         <c:catch var="exception">
             <jsp:useBean id="user" type="sinensia.modelo.User" 
                          scope="request">
