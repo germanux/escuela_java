@@ -7,7 +7,7 @@ $(document).ready(function () {
             "age": $("#age").val()
         };
         $.post({"url": "api/users", 
-                "contentType": "JSON",
+                "contentType": "application/json;charset=UTF-8",
                 "data": JSON.stringify(objUser),
                 "success":
                     function (respuestaUserObj) {
