@@ -8,6 +8,7 @@ package sinensia.controllers.apirest;
 import com.google.gson.Gson;
 import sinensia.controllers.*;
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
@@ -41,12 +42,6 @@ public class UsersRestController extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp)
-            throws ServletException, IOException {
-
-    }
-
-    @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("application/json;charset=UTF-8");
         
@@ -63,4 +58,26 @@ public class UsersRestController extends HttpServlet {
                     + ex.getMessage() + "\"}");
         }
     }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+        String jsonUser = req.getParameter("json");
+        Logger.getLogger(UsersRestController.class.getName()).log(Level.SEVERE, null, jsonUser);
+        
+        User userObject = new Gson().fromJson(jsonUser, User.class);
+        try {
+            userObject = userSrv.create(
+                    userObject.getEmail(),
+                    userObject.getPassword(),
+                    userObject.getName(),
+                    Integer.toString(userObject.getAge()));
+        } catch (SQLException ex) {
+            Logger.getLogger(UsersRestController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
 }
+
+
+
