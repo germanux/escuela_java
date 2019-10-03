@@ -63,8 +63,8 @@ public class UsersRestController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        // Recicir el JSON como parámetro de FORMulario
-//        String jsonUser = req.getParameter("json");
+        //Recicir el JSON como parámetro de FORMulario
+       //String jsonUser = req.getParameter("json");
         BufferedReader bufRead = req.getReader();        
          String jsonUser;
          jsonUser = bufRead.readLine();
@@ -81,7 +81,7 @@ public class UsersRestController extends HttpServlet {
                     userObject.getPassword(),
                     userObject.getName(),
                     Integer.toString(userObject.getAge()));
-            //resp.setContentType("application/json;charset=UTF-8");
+            resp.setContentType("application/json;charset=UTF-8");
             
             Gson gson = new Gson();
             String textJson = gson.toJson(userObject);
