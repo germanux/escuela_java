@@ -93,19 +93,16 @@ public class UsersRestController extends HttpServlet {
 
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String id = req.getParameter("id");
         try {
-            userSrv.remove(Integer.parseInt(id));
+            userSrv.remove(Integer.parseInt(req.getParameter("id")));
         } catch (SQLException ex) {
             Logger.getLogger(UsersRestController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        BufferedReader bufRead = req.getReader();
-        String jsonUser;
-        jsonUser = bufRead.readLine();
+        String jsonUser = req.getReader().readLine();
         User userObject = new Gson().fromJson(jsonUser, User.class);
         try { // Debe venir ya con el id
             userObject = userSrv.update(userObject);
