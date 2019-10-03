@@ -6,6 +6,7 @@
 package sinensia.controllers.apirest;
 
 import com.google.gson.Gson;
+import java.io.BufferedReader;
 import sinensia.controllers.*;
 import java.io.IOException;
 import java.lang.reflect.Field;
@@ -44,7 +45,7 @@ public class UsersRestController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("application/json;charset=UTF-8");
-        
+
         try {
             List<User> usersList = userSrv.getAll();
             // Serializamos el List en un JSON
@@ -54,7 +55,7 @@ public class UsersRestController extends HttpServlet {
             resp.getWriter().print(textJson);
         } catch (Exception ex) {
             Logger.getLogger(UsersRestController.class.getName()).log(Level.SEVERE, null, ex);
-            resp.getWriter().print("{\"error\": \"" 
+            resp.getWriter().print("{\"error\": \""
                     + ex.getMessage() + "\"}");
         }
     }
@@ -62,9 +63,17 @@ public class UsersRestController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        String jsonUser = req.getParameter("json");
+        // Recicir el JSON como parámetro de FORMulario
+//        String jsonUser = req.getParameter("json");
+        BufferedReader bufRead = req.getReader();        
+         String jsonUser;
+         jsonUser = bufRead.readLine();
+         /*String li
+         while (jsonUser != null) {
+             jsonUser += bu
+         }*/
         Logger.getLogger(UsersRestController.class.getName()).log(Level.SEVERE, null, jsonUser);
-        
+
         User userObject = new Gson().fromJson(jsonUser, User.class);
         try {
             userObject = userSrv.create(
@@ -72,12 +81,13 @@ public class UsersRestController extends HttpServlet {
                     userObject.getPassword(),
                     userObject.getName(),
                     Integer.toString(userObject.getAge()));
+            //resp.setContentType("application/json;charset=UTF-8");
+            
+            Gson gson = new Gson();
+            String textJson = gson.toJson(userObject);
+            resp.getWriter().print(textJson);
         } catch (SQLException ex) {
             Logger.getLogger(UsersRestController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
+    }
 }
-
-
-

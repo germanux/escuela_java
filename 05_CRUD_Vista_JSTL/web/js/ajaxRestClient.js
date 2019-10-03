@@ -1,4 +1,4 @@
-window.onload = function() {
+window.addEventListener("load", function() {
   let data_table = document.getElementById("data_table")  ;
   // Que va en casi todos los navegadores excepto IE
   let ajaxObj = new XMLHttpRequest();
@@ -20,6 +20,7 @@ window.onload = function() {
           }
       }
   };
+  
   ajaxObj.open("GET", "api/users");
   ajaxObj.send();
-};
+});
