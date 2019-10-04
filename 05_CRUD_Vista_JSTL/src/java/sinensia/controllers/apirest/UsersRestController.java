@@ -94,9 +94,14 @@ public class UsersRestController extends HttpServlet {
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
-            userSrv.remove(Integer.parseInt(req.getParameter("id")));
+            String jsonUser = req.getReader().readLine();
+            User userObject = new Gson().fromJson(jsonUser, User.class);
+           userSrv.remove(userObject.getId());
+            resp.getWriter().print("OK");
         } catch (SQLException ex) {
             Logger.getLogger(UsersRestController.class.getName()).log(Level.SEVERE, null, ex);
+  
+            resp.getWriter().print("ERROR: " + ex.getMessage());
         }
     }
     
