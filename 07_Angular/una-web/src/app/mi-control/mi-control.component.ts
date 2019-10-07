@@ -12,7 +12,8 @@ export class MiControlComponent implements OnInit {
   propiedadHola = 'Vamos a tomar unas cañas!';
   hero: Hero = {
     id: 1,
-    name: 'Iron Man'
+    name: 'Iron Man',
+    file: ''
   };
 
   constructor() {

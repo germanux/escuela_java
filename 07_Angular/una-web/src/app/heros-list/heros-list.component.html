@@ -2,6 +2,7 @@
 <ul class="ul-heroes">
     <li *ngFor = "let hero of heroes">
         <span class="li-heroe">{{ hero.id }} </span> {{ hero.name }}
-        <img src="../../assets/images/{{ hero.file }}"/>
+        <img class="img-heroe" src="../../assets/images/{{ hero.file }}"/>
+ <!--   <app-hero-detail [hero]="hero"></app-hero-detail> -->
     </li>
 </ul>
