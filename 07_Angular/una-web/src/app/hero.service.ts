@@ -11,7 +11,10 @@ export class HeroService {
   arrayHeroes: Hero[];
 
   constructor(private messageSrv: MessageService) { 
-    this.arrayHeroes = HEROES;
+    let i = 0;
+    this.arrayHeroes = [];
+    for (i = 0; i < HEROES.length; i++)
+      this.arrayHeroes.push(HEROES[i]);
   }
 
   getHeroes() : Hero[] {
@@ -20,5 +23,9 @@ export class HeroService {
   }
   add(newHero: Hero): void {
     this.arrayHeroes.push(newHero);
+  }
+  getHero(id: number): Hero {
+    let hero = this.arrayHeroes.find( hero => hero.id === id );
+    return hero;
   }
 }
