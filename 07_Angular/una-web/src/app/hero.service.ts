@@ -8,10 +8,17 @@ import { MessageService } from './message.service';
 })
 export class HeroService {
 
-  constructor(private messageSrv: MessageService) { }
+  arrayHeroes: Hero[];
+
+  constructor(private messageSrv: MessageService) { 
+    this.arrayHeroes = HEROES;
+  }
 
   getHeroes() : Hero[] {
     this.messageSrv.add("HeroService: capturando heroes");
-    return HEROES;
+    return this.arrayHeroes;
+  }
+  add(newHero: Hero): void {
+    this.arrayHeroes.push(newHero);
   }
 }
