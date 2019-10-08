@@ -1,9 +1,14 @@
+
+//// Modulos Angular
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 
+//// Modulos Routing
+import { AppRoutingModule } from './app-routing.module';
+
+//// Componentes
 import { AppComponent } from './app.component';
 import { MiControlComponent } from './mi-control/mi-control.component';
 import { HerosListComponent } from './heros-list/heros-list.component';
