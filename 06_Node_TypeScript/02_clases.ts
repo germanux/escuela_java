@@ -43,3 +43,5 @@ class Pajaro extends Animal {
 }
 let avestruz: Pajaro = new Pajaro(2, 1, 8);
 avestruz.mostrar();
+// MAS EN...
+//https://github.com/germanux/cursomeanstack/tree/master/12_TypeScript

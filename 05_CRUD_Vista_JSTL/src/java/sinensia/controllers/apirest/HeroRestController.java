@@ -87,7 +87,7 @@ public class HeroRestController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("application/json;charset=UTF-8");
-
+        setAccessControlHeaders(resp);
         try {
             Gson gson = new Gson();
             String textJson = gson.toJson(listaHeroes);
@@ -113,6 +113,7 @@ public class HeroRestController extends HttpServlet {
         try {
             listaHeroes.add(heroObject);
             resp.setContentType("application/json;charset=UTF-8");
+            setAccessControlHeaders(resp);
             
             Gson gson = new Gson();
             String textJson = gson.toJson(heroObject);
@@ -121,6 +122,8 @@ public class HeroRestController extends HttpServlet {
             Logger.getLogger(HeroRestController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    
 /*
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -149,4 +152,22 @@ public class HeroRestController extends HttpServlet {
         resp.getWriter().print(new Gson().toJson(userObject));
     }
 */
+    
+    @Override
+    protected void doOptions(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        setAccessControlHeaders(resp);
+        resp.setStatus(HttpServletResponse.SC_OK); // Devolvemos cod 200 = OK
+    }
+
+    private void setAccessControlHeaders(HttpServletResponse resp) {
+        resp.setHeader("Access-Control-Allow-Origin",
+                "http://localhost:4200");
+        
+        resp.setHeader("Access-Control-Allow-Methods",
+                "OPTIONS,HEAD,GET,POST,PUT,DELETE");
+        
+        resp.setHeader("Access-Control-Allow-Headers",
+                "X-PINGOTHER, Origin, X-Requested-With, Content-Type, Accept"); 
+        resp.addHeader("Access-Control-Max-Age", "1728000"); // 20 días
+    }
 }
