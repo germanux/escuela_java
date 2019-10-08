@@ -10,10 +10,10 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 export class HeroRestService {
 
   urlApiRest = "http://localhost:8084/CRUD_Vista_JSTL/api/heroes";
-  arrayHeroes: Hero[];
-
+  httpOptions = {
+    headers: new HttpHeaders({'Content-Type': "application/json"})
+  };
   constructor(private httpCli: HttpClient) {
-    this.arrayHeroes = HEROES;
   }
   /*getHeroes() : Observable<Hero[]> {
    return of(this.arrayHeroes); // Devolvemos un observable que encapsula
@@ -28,7 +28,7 @@ export class HeroRestService {
     // gestionar desde fuera del servicio.
     return observResp;
   }
-  add(newHero: Hero): void {
-    this.arrayHeroes.push(newHero);
+  add(newHero: Hero): Observable<Hero> {
+   return this.httpCli.post<Hero>(this.urlApiRest, newHero, this.httpOptions );
   }
 }
