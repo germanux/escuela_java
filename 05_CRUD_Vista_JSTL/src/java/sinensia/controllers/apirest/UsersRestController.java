@@ -45,6 +45,7 @@ public class UsersRestController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("application/json;charset=UTF-8");
+        setAccessControlHeaders(resp);
 
         try {
             List<User> usersList = userSrv.getAll();
@@ -63,6 +64,7 @@ public class UsersRestController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
+        setAccessControlHeaders(resp);
         //Recicir el JSON como parámetro de FORMulario
         //String jsonUser = req.getParameter("json");
         BufferedReader bufRead = req.getReader();
@@ -94,6 +96,7 @@ public class UsersRestController extends HttpServlet {
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
+        setAccessControlHeaders(resp);
             String jsonUser = req.getReader().readLine();
             User userObject = new Gson().fromJson(jsonUser, User.class);
            userSrv.remove(userObject.getId());
@@ -108,6 +111,7 @@ public class UsersRestController extends HttpServlet {
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String jsonUser = req.getReader().readLine();
+        setAccessControlHeaders(resp);
         User userObject = new Gson().fromJson(jsonUser, User.class);
         try { // Debe venir ya con el id
             userObject = userSrv.update(userObject);
@@ -118,4 +122,22 @@ public class UsersRestController extends HttpServlet {
         resp.getWriter().print(new Gson().toJson(userObject));
     }
 
+    
+    @Override
+    protected void doOptions(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        setAccessControlHeaders(resp);
+        resp.setStatus(HttpServletResponse.SC_OK); // Devolvemos cod 200 = OK
+    }
+
+    private void setAccessControlHeaders(HttpServletResponse resp) {
+        resp.setHeader("Access-Control-Allow-Origin",
+                "http://localhost:4200");
+        
+        resp.setHeader("Access-Control-Allow-Methods",
+                "OPTIONS,HEAD,GET,POST,PUT,DELETE");
+        
+        resp.setHeader("Access-Control-Allow-Headers",
+                "X-PINGOTHER, Origin, X-Requested-With, Content-Type, Accept"); 
+        resp.addHeader("Access-Control-Max-Age", "1728000"); // 20 días
+    }
 }
