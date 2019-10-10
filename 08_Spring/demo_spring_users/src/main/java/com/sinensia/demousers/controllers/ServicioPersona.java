@@ -8,8 +8,12 @@ package com.sinensia.demousers.controllers;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sinensia.demousers.model.Persona;
@@ -25,7 +29,11 @@ public class ServicioPersona {
 
     private ArrayList<Persona> personas;
 
-    public Persona addPersonas(String nombre, String edad)
+    @RequestMapping(method = RequestMethod.POST)
+    public Persona addPersonas(
+    		@RequestParam(value = "nombre") String nombre, 
+    		@RequestParam(value = "edad", 
+    					  defaultValue = "1") String edad)
             throws NumberFormatException, IOException, IllegalArgumentException {
 
         if (nombre.equals("")) {
@@ -56,8 +64,12 @@ public class ServicioPersona {
     	}
     	return this.personas;
     }
-    
-    public Persona getPersona(String nombre) {
+	// O bien mapeamos una url como subdirectorio
+    //@GetMapping("/pornombre")
+	// O recibimos el nombre por parámetros
+    @GetMapping( params = "nombre")
+    public Persona getPersona(
+    		@RequestParam(value = "nombre") String nombre) {
 
         for (Persona p : personas) {
             if (p.getNombre().equalsIgnoreCase(nombre)) {
@@ -66,8 +78,23 @@ public class ServicioPersona {
         }
         return null;
     }
+	// O recibimos el parámetro como ruta en la url
+    @RequestMapping( value = "/{edad}", 
+    		method = RequestMethod.GET)
+    public Persona getEdad(
+    		@PathVariable int edad) {
 
-    public boolean removePersona(String nombre) {
+        for (Persona p : personas) {
+            if (p.getEdad() == edad) {
+                return p;
+            }
+        }
+        return null;
+    }
+	
+    @DeleteMapping()
+    public boolean removePersona(
+    		@RequestParam(value = "nombre") String nombre) {
         Persona perElim = null;
         for (Persona p : personas) {
             if (p.getNombre().equalsIgnoreCase(nombre)) {
