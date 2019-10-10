@@ -15,6 +15,11 @@ public class Persona {
     private String nombre;
     private int edad;
 
+    /** Contructor para crear una persona con todos sus campos
+     * 
+     * @param nombre    El nombre y apellidos de la persona
+     * @param edad      Edad actual
+     */
     public Persona(String nombre, int edad) {
         this.nombre = nombre;
         this.edad = edad;
