@@ -8,14 +8,22 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class SpringrestClientApplication {
 
-	private static final String URL_SRV_87 = "http://172.16.4.61:8087/users";
-	
+
 	public static void main(String[] args) {
 		SpringApplication.run(SpringrestClientApplication.class, args);
 
 		System.out.println(">> Recogiendo usuarios");
-		
-		System.out.println(">> Usuarios recogidos");
+		RestClient clienteRest = new RestClient();
+		String jsonUsers = clienteRest.get("/users");
+		System.out.println(">> Usuarios recogidos: \n  " + jsonUsers);
+		String usuarioAEnviar = "{\n" + 
+				"    \"id\": 6,\n" + 
+				"    \"email\": \"enviado@desde.d\",\n" + 
+				"    \"name\": \"Spring Rest Cl\",\n" + 
+				"    \"age\": 50\n" + 
+				"}";
+		String jsonUserCreado = clienteRest.post("/users", usuarioAEnviar);
+		System.out.println(">> Usuario creado: \n  " + jsonUserCreado);
 	}
 	/*public List<User> getTodosUsuarios() {
 		
