@@ -1,4 +1,4 @@
-package com.sinensia.springrestusers.com.sinensia.springrestusers;
+package sinensia.springrestusers;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
