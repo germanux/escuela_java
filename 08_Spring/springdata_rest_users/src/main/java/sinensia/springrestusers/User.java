@@ -15,6 +15,9 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Size;
 
 /**
  *
@@ -22,13 +25,6 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "USERS")
-@NamedQueries({
-    @NamedQuery(name = "Users.findAll", query = "SELECT u FROM Users u")
-    , @NamedQuery(name = "Users.findById", query = "SELECT u FROM Users u WHERE u.id = :id")
-    , @NamedQuery(name = "Users.findByEmail", query = "SELECT u FROM Users u WHERE u.email = :email")
-    , @NamedQuery(name = "Users.findByPassword", query = "SELECT u FROM Users u WHERE u.password = :password")
-    , @NamedQuery(name = "Users.findByName", query = "SELECT u FROM Users u WHERE u.name = :name")
-    , @NamedQuery(name = "Users.findByAge", query = "SELECT u FROM Users u WHERE u.age = :age")})
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -38,13 +34,13 @@ public class User implements Serializable {
     @Column(name = "ID")
     private Integer id;
     @Basic(optional = false)
-    @Column(name = "EMAIL")
+    @Column(name = "EMAIL", unique = true)
+    @Email
     private String email;
-    @Basic(optional = false)
-    @Column(name = "PASSWORD")
-    private String password;
+    
     @Basic(optional = false)
     @Column(name = "NAME")
+    @Size(min = 2, max = 30)
     private String name;
     @Basic(optional = false)
     @Column(name = "AGE")
@@ -60,7 +56,6 @@ public class User implements Serializable {
     public User(Integer id, String email, String password, String name, int age) {
         this.id = id;
         this.email = email;
-        this.password = password;
         this.name = name;
         this.age = age;
     }
@@ -79,14 +74,6 @@ public class User implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public String getName() {
